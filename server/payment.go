@@ -14,7 +14,7 @@ func (s *Server) Payment(c *gin.Context) {
 		return
 	}
 
-	if err := s.api.StripePayment(c, payment); err != nil {
+	if err := s.api.StripePaymentAPI(c, payment); err != nil {
 		c.JSON(400, gin.H{"error": "Error creating charge"})
 		return
 	}

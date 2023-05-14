@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func (api *StripeAPIImpl) StripePayment(c *gin.Context, stripePay model.Payment) error {
+func (api *StripeAPIImpl) StripePaymentAPI(c *gin.Context, stripePay model.Payment) error {
 	secretKey := api.StripeKey
 	if err := controller.StripePayment(c, secretKey, &stripePay); err != nil {
 		return err

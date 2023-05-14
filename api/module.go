@@ -7,7 +7,7 @@ import (
 )
 
 type StripeAPI interface {
-	StripePayment(c *gin.Context, stripePay model.Payment) error
+	StripePaymentAPI(c *gin.Context, stripePay model.Payment) error
 }
 
 type StripeAPIImpl struct {
