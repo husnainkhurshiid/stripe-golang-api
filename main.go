@@ -2,15 +2,15 @@ package main
 
 import (
 	"log"
-	"stripeIntegration/controller"
+	"net/http"
+	"stripeIntegration/server"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 
-	router := gin.Default()
-	router.POST("/charge", controller.StripePayment)
-	log.Fatal(router.Run(":8080"))
+	router := gin.New()
+	log.Fatal(http.ListenAndServe(":8080", server.NewServerImpl(router)))
 
 }

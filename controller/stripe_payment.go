@@ -11,18 +11,8 @@ import (
 	"github.com/stripe/stripe-go/token"
 )
 
-const (
-	StripeKey = "sk_test_51N7aE4ATO5Vxvnix1lLgKuSdx3EOhKBKQLGvaAQ7fqEqsk6HkGDBCl7F4CZn4lULjnTG39pS1NNfZP4N30Ga3dSy00ASXC0DR4"
-)
-
-func StripePayment(c *gin.Context) {
-	stripe.Key = StripeKey
-	var stripePay model.Payment
-
-	if err := c.ShouldBind(&stripePay); err != nil {
-		c.JSON(400, gin.H{"error": err.Error()})
-		return
-	}
+func StripePayment(c *gin.Context, secretKey string, stripePay *model.Payment) error {
+	stripe.Key = secretKey
 
 	// Create a token using a credit or debit card
 	tokenParams := &stripe.TokenParams{
@@ -66,4 +56,5 @@ func StripePayment(c *gin.Context) {
 
 	// c.JSON(http.StatusOK, gin.H{"message": "Charge created successfully"})
 	c.JSON(http.StatusOK, params)
+	return nil
 }
